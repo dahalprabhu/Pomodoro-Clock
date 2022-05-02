@@ -25,7 +25,14 @@
             class="button mode-button"
             id="js-short-break"
           >
-             Break
+             Short Break
+          </button>
+          <button
+            data-mode="longBreak"
+            class="button mode-button"
+            id="js-long-break"
+          >
+            Long break
           </button>
           
         </div>
@@ -41,6 +48,11 @@
           Reset
         </button>
     </main>
+    <div class="hidden">
+      <audio src="backtowork.mp3" data-sound="pomodoro"></audio>
+      <audio src="break.mp3" data-sound="shortBreak"></audio>
+      <audio src="break.mp3" data-sound="longBreak"></audio>
+    </div>
     <script src="main.js"></script>
   </body>
 </html>

@@ -8,8 +8,10 @@ const timer = {
 
 let interval;
 
+const buttonSound = new Audio("button-sound.mp3");
 const mainButton = document.getElementById("js-btn");
 mainButton.addEventListener("click", () => {
+  buttonSound.play();
   const { action } = mainButton.dataset;
   if (action === "start") {
     startTimer();
@@ -82,6 +84,8 @@ function startTimer() {
         new Notification(text);
       }
 
+      document.querySelector(`[data-sound="${timer.mode}"]`).play();
+
       startTimer();
     }
   }, 1000);
@@ -114,7 +118,13 @@ function updateClock() {
   }
 
   if (timer.mode === "shortBreak" && minutes === "04" && seconds === "59") {
-    alert("The break has begun. Please stop working and go have fun!");
+    alert(
+      "The short break has begun. Please stop working and relax for a bit."
+    );
+  }
+
+  if (timer.mode === "longBreak" && minutes === "14" && seconds === "59") {
+    alert("The break has begun. Please stop working and have some fun!.");
   }
 
   const text =
@@ -180,10 +190,18 @@ function resetTimer() {
   if (timer.mode === "pomodoro") {
     document.getElementById("js-minutes").innerText = "25";
     document.getElementById("js-seconds").innerText = "00";
-  } else {
+  }
+
+  if (timer.mode === "shortBreak") {
     document.getElementById("js-minutes").innerHTML = "05";
     document.getElementById("js-seconds").innerHTML = "00";
   }
+
+  if (timer.mode === "longBreak") {
+    document.getElementById("js-minutes").innerHTML = "15";
+    document.getElementById("js-seconds").innerHTML = "00";
+  }
+
   mainButton.dataset.action = "start";
   mainButton.textContent = "start";
 }
